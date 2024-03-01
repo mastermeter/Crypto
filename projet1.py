@@ -21,9 +21,16 @@ txt_encoded = str.encode(txt_encoded, 'utf-8')
 msg_final = msg + nb_char + txt_encoded
 
 sock.connect((HOST,port))
-sock.send(msg_final)
-while True :
+cont = True
+
+while cont :
+
+    sock.send(msg_final)
     rcv_msg = sock.recv(65536)
     print(rcv_msg)
-        
- 
+
+    print("Send a new message")
+    txt2 = input("y/n : ")
+    if txt2 == "n":
+        cont = False
+sock.close()
