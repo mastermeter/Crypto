@@ -23,15 +23,15 @@ def send_message():
     msg_final = msg + nb_char + txt_encoded
     sock.send(msg_final)
 
+    
 
 
 sock.connect((HOST,port))
 cont = True
 
 while cont :
-
     send_message()
-
+    
     print("Send a new message")
     txt2 = input("y/n : ")
     if txt2 == "n":
