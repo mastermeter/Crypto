@@ -5,6 +5,18 @@ port = 6000
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
 #functions
+def string_toListInt(message):
+    message = message.encode('utf-8')
+    liste_entiers = [b for b in message]
+    return liste_entiers
+
+def encoding(liste_entiers):
+    binaires = [format(elem,'32b') for elem in liste_entiers]
+    result = "".join(binaires)
+    return result
+    
+
+
 def send_message():
     #envoi
     key = "ISC"
@@ -23,7 +35,8 @@ def send_message():
     msg_final = msg + nb_char + txt_encoded
     sock.send(msg_final)
 
-    
+
+
 
 
 sock.connect((HOST,port))
@@ -32,10 +45,10 @@ cont = True
 while cont :
     send_message()
     
-    print("Send a new message")
-    txt2 = input("y/n : ")
-    if txt2 == "n":
-        cont = False
-        print("End of the communication")
+    # print("Send a new message")
+    # txt2 = input("y/n : ")
+    # if txt2 == "n":
+    #     cont = False
+    #     print("End of the communication")
 
 sock.close()
