@@ -10,11 +10,14 @@ def string_toListInt(message):
     liste_entiers = [b for b in message]
     return liste_entiers
 
+# def encoding(liste_entiers):
+#     binaires = [format(elem,'32b') for elem in liste_entiers]
+#     result = "".join(binaires)
+#     return result
+
 def encoding(liste_entiers):
-    binaires = [format(elem,'32b') for elem in liste_entiers]
-    result = "".join(binaires)
-    return result
-    
+    chain = b''.join([bytes([elem]) for elem in liste_entiers])
+    print(chain)
 
 
 def send_message():

@@ -1,13 +1,13 @@
+#transforms each character in a bytes chain in an integer
 def btoint(message):
     message = message.encode('utf-8')
     liste_entiers = [b for b in message]
-    for element in liste_entiers:
-        print(element)
+
     return liste_entiers
 
 def encoding(liste_entiers):
-    binaires = [format(elem,'32b') for elem in liste_entiers]
-    result = ''.join(binaires)
+    chain = b''.join([bytes([elem]) for elem in liste_entiers])
+    print(chain)
 
 
 print(encoding(btoint("Hello world ç")))
