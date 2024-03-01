@@ -24,6 +24,6 @@ sock.connect((HOST,port))
 sock.send(msg_final)
 while True :
     rcv_msg = sock.recv(65536)
-    print(str.encode(rcv_msg, 'utf-8'))
+    print(rcv_msg)
         
  
