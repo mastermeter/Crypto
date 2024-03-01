@@ -14,8 +14,7 @@ def receive_message():
 sock.connect((HOST,port))
 #sock.send(msg_final)
 while True :
-    receive_message
-   
+    receive_message()
         
  
 
