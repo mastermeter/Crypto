@@ -82,13 +82,13 @@ print("----------------------------------------------------------------")
 
 print(test)
 print(returnresult)
-# shifter de 1 chaque entier de la liste
+# xor de 4 chaque entier de la liste
 print(xor(returnresult,4))
 # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
 print(encoding(xor(returnresult,4)))
 #décoder la suite de binaire en une liste d'entier
 print(decoding(encoding(xor(returnresult,4))))
-#fonction qui enlève le shift sur tous les membres de liste d'entier
+#fonction qui enlève le xor sur tous les membres de liste d'entier
 print(xor(decoding(encoding(xor(returnresult,4))),4))
 #fonction qui converti la liste d'entier en un string
 print(listInt_toString(xor(decoding(encoding(xor(returnresult,4))),4)))
