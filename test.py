@@ -55,6 +55,10 @@ def deshifter(msg,deshift) :
     resultats = [elem - deshift for elem in msg]
     return resultats
 
+def xor(msg,nb) :
+    resultats = [elem ^ nb for elem in msg]
+    return resultats
+
 
 test = "j'aime le Chocolat ç `ñ"
 
@@ -73,3 +77,18 @@ print(decoding(encoding(shifter(returnresult,1))))
 print(deshifter(decoding(encoding(shifter(returnresult,1))),1))
 #fonction qui converti la liste d'entier en un string
 print(listInt_toString(deshifter(decoding(encoding(shifter(returnresult,1))),1)))
+
+print("----------------------------------------------------------------")
+
+print(test)
+print(returnresult)
+# shifter de 1 chaque entier de la liste
+print(xor(returnresult,1))
+# transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
+print(encoding(xor(returnresult,1)))
+#décoder la suite de binaire en une liste d'entier
+print(decoding(encoding(xor(returnresult,1))))
+#fonction qui enlève le shift sur tous les membres de liste d'entier
+print(xor(decoding(encoding(xor(returnresult,1))),1))
+#fonction qui converti la liste d'entier en un string
+print(listInt_toString(xor(decoding(encoding(xor(returnresult,1))),1)))
