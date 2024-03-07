@@ -56,7 +56,7 @@ def deshifter(msg,deshift) :
     return resultats
 
 
-test = "j'aime le Chocolat"
+test = "j'aime le Chocolat ç `ñ"
 
 print(test)
 # Transformer le texte en une liste de lettre convertie en utf8 (entier) stocké dans une liste d'entier
