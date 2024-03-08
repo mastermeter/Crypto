@@ -1,4 +1,5 @@
 import socket
+import mainFunctions
 
 HOST = "vlbelintrocrypto.hevs.ch"
 port = 6000

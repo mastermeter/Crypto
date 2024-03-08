@@ -5,9 +5,11 @@ def btoint(message):
 
     return liste_entiers
 
+
 def encoding(liste_entiers):
     chain = b''.join([bytes([elem]) for elem in liste_entiers])
     print(chain)
+    
 
 
 print(encoding(btoint("Hello world ç")))
