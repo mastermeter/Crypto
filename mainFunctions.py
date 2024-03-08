@@ -63,6 +63,41 @@ def xor(msg,nb) :
     resultats = [elem ^ nb for elem in msg]
     return resultats
 
+def vignere(msg, key):
+    result = msg[:]
+    key_length = len(key)
+    counter = 0
+    counter2 = 0
+
+    while counter <= len(result) - 1:
+        unit = [result[counter]]
+        result[counter] = shifter(unit, key[counter2])[0]
+        counter += 1
+        counter2 = (counter2 + 1) % key_length
+
+    return result
+
+def devignere(msg, key):
+    result = msg[:]
+    key_length = len(key)
+    counter = 0
+    counter2 = 0
+
+    while counter <= len(result) - 1:
+        unit = [result[counter]]
+        result[counter] = deshifter(unit, key[counter2])[0]
+        counter += 1
+        counter2 = (counter2 + 1) % key_length
+
+    return result
+
+
+a0 = [1, 2, 3, 4]
+b = [9, 3]
+c = vignere(a0, b)
+print('Encrypted:', c)
+d = devignere(c, b)
+print('Decrypted:', d)
 
 test = "j'aime le Chocolat ç `ñ"
 
