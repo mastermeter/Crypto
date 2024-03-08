@@ -1,11 +1,10 @@
 import socket
-#import mainFunctions
-import receive
+import mainFunctions
+
 
 HOST = "vlbelintrocrypto.hevs.ch"
 port = 6000
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
 
 def send_message():
     #envoi
@@ -17,12 +16,15 @@ def send_message():
     txt = input("Entrez votre texte : ")
     longueur_txt = len(txt)
     nb_char = longueur_txt.to_bytes(2,"big")
+
     txt_encoded = ""
     null = '\0'
     for i in range(len(txt)):
         txt_encoded += 3*null + txt[i]  
     txt_encoded = str.encode(txt_encoded, 'utf-8')
     msg_final = msg + nb_char + txt_encoded
+    print(nb_char)
+    print(msg_final)
     sock.send(msg_final)
 
 
@@ -39,6 +41,4 @@ while cont :
         cont = False
         print("End of the communication")
     
-    receive.receive_message()
-
 sock.close()

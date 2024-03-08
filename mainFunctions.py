@@ -1,7 +1,9 @@
 
 def string_toListInt(message):
-    message = message.encode('utf-8')
-    liste_entiers = [b for b in message]
+    liste_bytes = [list(char.encode('utf-8')) for char in message]
+
+    # Convertir chaque liste de bytes en un entier
+    liste_entiers = [int.from_bytes(bytes(b), 'big') for b in liste_bytes]
 
     return liste_entiers
 
@@ -31,11 +33,15 @@ def decoding(binary_string):
 
     return integers
 
-def listInt_toString(entiers):
-    # Convertir chaque entier en caractère en utilisant UTF-8
-    message_bytes = bytes(entiers)
-    decoded_string = message_bytes.decode('utf-8')
-    return decoded_string
+def listInt_toString(liste_entiers):
+    # Convertir chaque entier en une liste de bytes
+    liste_bytes = [list(i.to_bytes((i.bit_length() + 7) // 8, 'big') or b'\0') for i in liste_entiers]
+
+    # Décoder chaque liste de bytes en un caractère
+    message = ''.join(bytes(b).decode('utf-8') for b in liste_bytes)
+
+    return message
+   
 
 def shifter(msg,shift) :
     # Ajouter l'entier à chaque élément de la liste
@@ -56,32 +62,32 @@ def xor(msg,nb) :
 test = "j'aime le Chocolat ç `ñ"
 
 print(test)
-# Transformer le texte en une liste de lettre convertie en utf8 (entier) stocké dans une liste d'entier
+# # Transformer le texte en une liste de lettre convertie en utf8 (entier) stocké dans une liste d'entier
 returnresult = string_toListInt(test)
 
 print(returnresult)
-# shifter de 1 chaque entier de la liste
-print(shifter(returnresult,1))
-# transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
-print(encoding(shifter(returnresult,1)))
-#décoder la suite de binaire en une liste d'entier
-print(decoding(encoding(shifter(returnresult,1))))
-#fonction qui enlève le shift sur tous les membres de liste d'entier
-print(deshifter(decoding(encoding(shifter(returnresult,1))),1))
-#fonction qui converti la liste d'entier en un string
-print(listInt_toString(deshifter(decoding(encoding(shifter(returnresult,1))),1)))
+# # shifter de 1 chaque entier de la liste
+# print(shifter(returnresult,1))
+# # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
+# print(encoding(shifter(returnresult,1)))
+# #décoder la suite de binaire en une liste d'entier
+# print(decoding(encoding(shifter(returnresult,1))))
+# #fonction qui enlève le shift sur tous les membres de liste d'entier
+# print(deshifter(decoding(encoding(shifter(returnresult,1))),1))
+# #fonction qui converti la liste d'entier en un string
+# print(listInt_toString(deshifter(decoding(encoding(shifter(returnresult,1))),1)))
 
-print("----------------------------------------------------------------")
+# print("----------------------------------------------------------------")
 
-print(test)
-print(returnresult)
-# xor de 4 chaque entier de la liste
-print(xor(returnresult,4))
-# transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
-print(encoding(xor(returnresult,4)))
-#décoder la suite de binaire en une liste d'entier
-print(decoding(encoding(xor(returnresult,4))))
-#fonction qui enlève le xor sur tous les membres de liste d'entier
-print(xor(decoding(encoding(xor(returnresult,4))),4))
-#fonction qui converti la liste d'entier en un string
-print(listInt_toString(xor(decoding(encoding(xor(returnresult,4))),4)))
+# print(test)
+# print(returnresult)
+# # xor de 4 chaque entier de la liste
+# print(xor(returnresult,4))
+# # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
+# print(encoding(xor(returnresult,4)))
+# #décoder la suite de binaire en une liste d'entier
+# print(decoding(encoding(xor(returnresult,4))))
+# #fonction qui enlève le xor sur tous les membres de liste d'entier
+# print(xor(decoding(encoding(xor(returnresult,4))),4))
+# #fonction qui converti la liste d'entier en un string
+# print(listInt_toString(xor(decoding(encoding(xor(returnresult,4))),4)))
