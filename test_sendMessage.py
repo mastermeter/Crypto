@@ -24,6 +24,7 @@ def send_message():
     
         txt_encoded = mainFunctions.string_toListInt(txt)
         txt_encoded = mainFunctions.shifter(txt_encoded,shift)
+
     elif encoding_type == "xor":
         nb = int(input("Entrez un nombre pour le xor : "))
         #msg = mainFunctions.string_toListInt(msg)
@@ -35,23 +36,12 @@ def send_message():
     longueur_txt = len(txt)
     nb_char = longueur_txt.to_bytes(2,"big")
 
-
-    txt_encoded = mainFunctions.encoding(txt_encoded)
-    txt_encoded = mainFunctions.decoding(txt_encoded)
     txt_encoded = mainFunctions.listInt_toString(txt_encoded)
-
-    final_text = ""
-    null = '\0'
-    for i in range(len(txt_encoded)):
-        final_text += 3*null + txt_encoded[i]
     
-    final_text = str.encode(final_text, 'utf-8')
-
-
+    final_text = mainFunctions.word_to_bytes(txt_encoded)
     
     msg_final = msg + nb_char + final_text
-    print(nb_char)
-    print(msg_final)
+    
     sock.send(msg_final)
 
 

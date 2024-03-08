@@ -33,6 +33,11 @@ def decoding(binary_string):
 
     return integers
 
+def word_to_bytes(word):
+    # Convert each character to bytes, pad to 4 bytes if necessary
+    byte_string = b''.join(b'\x00' * (4 - len(char.encode('utf-8'))) + char.encode('utf-8') for char in word)
+    return byte_string
+
 def listInt_toString(liste_entiers):
     # Convertir chaque entier en une liste de bytes
     liste_bytes = [list(i.to_bytes((i.bit_length() + 7) // 8, 'big') or b'\0') for i in liste_entiers]
