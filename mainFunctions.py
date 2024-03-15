@@ -1,4 +1,3 @@
-
 def string_toListInt(message):
     liste_bytes = [list(char.encode('utf-8')) for char in message]
 

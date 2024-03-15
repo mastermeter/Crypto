@@ -6,6 +6,15 @@ HOST = "vlbelintrocrypto.hevs.ch"
 port = 6000
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
+def receive_message():
+    rcv_msg = sock.recv(65536) # 64Ko
+    rcv_msg = rcv_msg.replace(b'\0',b'')
+    rcv_msg = rcv_msg.decode('utf-8')
+    rcv_msg = rcv_msg[5:]
+
+    
+    print(rcv_msg)
+
 def send_message():
     #envoi
     msg = ""
@@ -14,7 +23,6 @@ def send_message():
     key = "ISC"
     msg_type = input("Entrez un type de message : (t,i,s) : ")
     msg = str.encode(key + msg_type)
-    
     txt = input("Entrez votre texte : ")
 
     #Connaitre type d'encodage
@@ -49,13 +57,16 @@ def send_message():
 sock.connect((HOST,port))
 cont = True
 
+
+send_message
+
 while cont :
     send_message()
-    
-    print("Send a new message ?")
-    txt2 = input("y/n : ")
-    if txt2 == "n":
-        cont = False
-        print("End of the communication")
+    receive_message()
+    #print("Send a new message ?")
+    #txt2 = input("y/n : ")
+    # if txt2 == "n":
+    #     cont = False
+    #     print("End of the communication")
     
 sock.close()
