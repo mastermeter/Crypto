@@ -92,20 +92,25 @@ def devignere(msg, key):
     return result
 
 
-a0 = [1, 2, 3, 4]
-b = [9, 3]
-c = vignere(a0, b)
-print('Encrypted:', c)
-d = devignere(c, b)
-print('Decrypted:', d)
 
-test = "j'aime le Chocolat ç `ñ"
 
-print(test)
+
+
+
+# a0 = [1, 2, 3, 4]
+# b = [9, 3]
+# c = vignere(a0, b)
+# print('Encrypted:', c)
+# d = devignere(c, b)
+# print('Decrypted:', d)
+
+#test = "j'aime le Chocolat ç `ñ"
+
+#print(test)
 # # Transformer le texte en une liste de lettre convertie en utf8 (entier) stocké dans une liste d'entier
-returnresult = string_toListInt(test)
+#returnresult = string_toListInt(test)
 
-print(returnresult)
+#print(returnresult)
 # # shifter de 1 chaque entier de la liste
 # print(shifter(returnresult,1))
 # # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
