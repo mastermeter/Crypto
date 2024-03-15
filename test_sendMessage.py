@@ -52,7 +52,7 @@ cont = True
 while cont :
     send_message()
     
-    print("Send a new message")
+    print("Send a new message ?")
     txt2 = input("y/n : ")
     if txt2 == "n":
         cont = False
