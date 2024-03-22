@@ -1,19 +1,21 @@
-def puissances_fractionnees(base, exposant):
+def modulo_exponentiation(a, e, n):
     result = 1
-    puissance_deux = base
+    power_of_a = a % n  # Initialise la puissance de 'a' à 'a % n'
 
     # Convertir l'exposant en binaire
-    exposant_binaire = bin(exposant)[2:]  # Ignorer le préfixe '0b'
+    binary_exponent = bin(e)[2:]  # Ignorer le préfixe '0b'
 
     # Parcourir chaque bit de l'exposant
-    for bit in exposant_binaire[::-1]:  # Inverser la chaîne binaire pour commencer par les bits de poids faible
+    for bit in binary_exponent[::-1]:  # Inverser la chaîne binaire pour commencer par les bits de poids faible
         if bit == '1':
-            result *= puissance_deux
-        puissance_deux *= puissance_deux  # Calculer la puissance de la puissance de 2 suivante
+            result = (result * power_of_a) % n
+        power_of_a = (power_of_a * power_of_a) % n  # Calculer la puissance de la puissance de 2 suivante modulo 'n'
 
     return result
 
-base = 34
-exposant = 677
-resultat = puissances_fractionnees(base, exposant)
-print(resultat)
+# Exemple d'utilisation
+a = 34
+e = 13
+n = 2 ** 32
+k = modulo_exponentiation(a, e, n)
+print(k)
