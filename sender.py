@@ -1,5 +1,7 @@
 import socket
 import mainFunctions
+import rsaFunctions
+from operator import xor
 
 
 HOST = "vlbelintrocrypto.hevs.ch"
@@ -12,7 +14,6 @@ def receive_message():
     rcv_msg = rcv_msg.decode('utf-8')
     rcv_msg = rcv_msg[5:]
 
-    
     print(rcv_msg)
 
 def send_message():
@@ -22,11 +23,14 @@ def send_message():
     
     key = "ISC"
     msg_type = input("Entrez un type de message : (t,i,s) : ")
+    if msg_type != "t" and msg_type != "i" and msg_type != "s":
+        print("Type de message non reconnu")
+        msg_type = input("Entrez un type de message : (t,i,s) : ")
     msg = str.encode(key + msg_type)
     txt = input("Entrez votre texte : ")
 
     #Connaitre type d'encodage
-    encoding_type = input("Entrez un type d'encodage : (shift, xor) : ")
+    encoding_type = input("Entrez un type d'encodage : (shift, xor, rsa) : ")
     if encoding_type == "shift":
         shift = int(input("Entrez un nombre pour le décalage : "))
     

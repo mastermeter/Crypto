@@ -3,9 +3,7 @@ def gcd(a, b):
         if a % i == 0 and b % i == 0:
             return i
 
-
-
-
+# Algorithme d'Euclide étendu
 ## y = b, pas négatif
 def extended_gcd(e, k):
    if k == 0: return e, 1, 0
@@ -17,7 +15,6 @@ def extended_gcd(e, k):
        y = 0 - y
        x = 0 - x
    return gcd, x, y
-
 
 
 def isPrime(n):
@@ -46,5 +43,12 @@ def generate_key(p,q):
         k = (p-1)*(q-1)
         e = coprimeWith(k) 
         d, b = extended_gcd(e,k)
-        
+        return n, e, d
+
+def encrypt(message, e, n):
+    return (message**e) % n
+
+def decrypt(hiddenMess, d, n):
+    return (hiddenMess**d) % n    
+     
 
