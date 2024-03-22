@@ -35,13 +35,16 @@ def coprimeWith(a):
                 return i
 
 def generate_key(p,q):
-    while(isPrime(p) == True and isPrime(q) == True and p*q < 2**32):
+    if(isPrime(p) == True and isPrime(q) == True and p*q < 2**32):
         n = p*q
         k = (p-1)*(q-1)
         e = coprimeWith(k) 
         l, d, b = extended_gcd(e,k)
         print(n, k,  e,  d,  b,  l) 
         return n, e, d
+    else:
+        print("p and q must be prime numbers and their product must be less than 2^32")
+        return -1, -1, -1
 
 # méthode optimisée pour encrypt et decrypt
 def modulo_exponentiation(a, e, n):
@@ -66,7 +69,7 @@ def decryptKey(hiddenMess, d, n):
     return modulo_exponentiation(hiddenMess, d, n)  
      
 
-n, e, d = generate_key(211, 541)
+n, e, d = generate_key(6656459, 23)
 
 
 lol = encryptKey(666, e, n)
