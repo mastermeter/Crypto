@@ -6,15 +6,12 @@ def gcd(a, b):
 # Algorithme d'Euclide étendu
 ## y = b, pas négatif
 def extended_gcd(e, k):
-   if k == 0: return e, 1, 0
-  
-   gcd, x1, y1 = extended_gcd(k, e % k)
-   x = y1
-   y = x1 - (e // k) * y1
-   if(y > 0):
-       y = 0 - y
-       x = 0 - x
-   return gcd, x, y
+    if e == 0:
+        return k, 0, 1
+    else:
+        gcd, x, y = extended_gcd(k % e, e)
+        x, y = y - (k // e) * x, x
+        return gcd, x % k, y  # Utilisez le modulo k pour garantir que x est positif
 
 
 def isPrime(n):
@@ -38,17 +35,41 @@ def coprimeWith(a):
                 return i
 
 def generate_key(p,q):
-    while(isPrime(p,q) == True and p*q < 2**32):
+    while(isPrime(p) == True and isPrime(q) == True and p*q < 2**32):
         n = p*q
         k = (p-1)*(q-1)
         e = coprimeWith(k) 
-        d, b = extended_gcd(e,k)
+        l, d, b = extended_gcd(e,k)
+        print(n, k,  e,  d,  b,  l) 
         return n, e, d
 
-def encrypt(message, e, n):
-    return (message**e) % n
+# méthode optimisée pour encrypt et decrypt
+def modulo_exponentiation(a, e, n):
+    result = 1
+    power_of_a = a % n  # Initialise la puissance de 'a' à 'a % n'
 
-def decrypt(hiddenMess, d, n):
-    return (hiddenMess**d) % n    
+    # Convertir l'exposant en binaire
+    binary_exponent = bin(e)[2:]  # Ignorer le préfixe '0b'
+
+    # Parcourir chaque bit de l'exposant
+    for bit in binary_exponent[::-1]:  # Inverser la chaîne binaire pour commencer par les bits de poids faible
+        if bit == '1':
+            result = (result * power_of_a) % n
+        power_of_a = (power_of_a * power_of_a) % n  # Calculer la puissance de la puissance de 2 suivante modulo 'n'
+
+    return result
+
+def encryptKey(message, e, n):
+    return modulo_exponentiation(message, e, n)
+
+def decryptKey(hiddenMess, d, n):
+    return modulo_exponentiation(hiddenMess, d, n)  
      
 
+n, e, d = generate_key(211, 541)
+
+
+lol = encryptKey(666, e, n)
+
+print(encryptKey(666, e, n))
+print(decryptKey(lol, d, n))
