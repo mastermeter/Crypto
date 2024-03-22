@@ -1,7 +1,7 @@
 import socket
 import mainFunctions
 
-
+#server information 
 HOST = "vlbelintrocrypto.hevs.ch"
 port = 6000
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -52,7 +52,7 @@ cont = True
 while cont :
     send_message()
     
-    print("Send a new message")
+    print("Send a new message ?")
     txt2 = input("y/n : ")
     if txt2 == "n":
         cont = False
