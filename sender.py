@@ -22,6 +22,7 @@ def send_message():
     
     key = "ISC"
     msg_type = input("Entrez un type de message : (t,i,s) : ")
+
     if msg_type != "t" and msg_type != "i" and msg_type != "s":
         print("Type de message non reconnu")
         msg_type = input("Entrez un type de message : (t,i,s) : ")
@@ -29,8 +30,11 @@ def send_message():
     txt = input("Entrez votre texte : ")
 
     #Connaitre type d'encodage
-    encoding_type = input("Entrez un type d'encodage : (shift, xor, rsa) : ")
-    if encoding_type == "shift":
+    encoding_type = input("Entrez un type d'encodage : (none, shift, xor, rsa) : ")
+    if encoding_type == "none":
+        txt_encoded = mainFunctions.string_toListInt(txt)
+
+    elif encoding_type == "shift":
         shift = int(input("Entrez un nombre pour le décalage : "))
     
         txt_encoded = mainFunctions.string_toListInt(txt)
