@@ -1,7 +1,6 @@
 import socket
 import mainFunctions
 import rsaFunctions
-from operator import xor
 
 
 HOST = "vlbelintrocrypto.hevs.ch"
