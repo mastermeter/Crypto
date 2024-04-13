@@ -13,12 +13,11 @@ class ChatWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        #self.messageDisplay.append("TESSSST")
+        self.messageDisplay.append("TESSSST")
         self.sendButton.clicked.connect(self.handle_user_input)
         self.messageDisplay.append("Hello")
-        hello = self.messageInput.toPlainText()
-        self.messageDisplay.clear
-        self.messageDisplay.append(hello)
+        #self.messageDisplay.clear()
+        
     
     def handle_user_input(self):
         # Récupérer le texte de QTextEdit
@@ -41,7 +40,9 @@ class ChatWindow(QMainWindow, Ui_MainWindow):
         msg_type = ""
 
         self.messageDisplay.append("Entrez un type de message : (t,i,s)")
-        msg_type = self.messageInput.toPlainText()
+        msg_type = self.handle_user_input
+        self.messageDisplay.append(msg_type)
+
 
         if msg_type != "t" and msg_type != "i" and msg_type != "s":
             self.messageDisplay.append("Type de message non reconnu")
