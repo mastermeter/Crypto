@@ -56,6 +56,9 @@ def send_message():
     final_text = mainFunctions.word_to_bytes(txt_encoded)
     
     msg_final = msg + nb_char + final_text
+
+
+
     
     sock.send(msg_final)
 
