@@ -21,17 +21,28 @@ COMMANDS = {
 
 class ReceiverThread(QThread):
     received = pyqtSignal(str)
-    
+    receivedServer = pyqtSignal(str)  # Pour les messages du serveur
+
 
     def __init__(self, app, sock):
         super().__init__()
+        self.app = app
         self.sock = sock
 
     def run(self):
         while True:
             try:
-                rcv_msg = MyApp.receive_message(self)
-                self.received.emit(">>>Message received: " + rcv_msg)
+                message = self.app.receive_message()
+                # Supposons que vous pouvez distinguer les messages serveur par un préfixe ou une structure spécifique
+                if ("key" in message):
+                    print("KEY IN MESSAGE")
+                    self.receivedServer.emit(">>> Received from server : " + message)  # Message du serveur
+                    message = self.app.getFrom_server()
+                    print("MESSAGE AFTER GET FROM SERVER :"+ message)
+                    self.receivedServer.emit(">>> " + message)  # Message du serveur
+                else:
+                    self.received.emit(">>>Message received: " + message)  # Message normal
+
             except Exception as e:
                 print(f"Erreur lors de la réception des données: {e}")
                 break
@@ -47,6 +58,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.sock.connect((HOST, port))
         self.thread = ReceiverThread(self, self.sock)
         self.thread.received.connect(self.update_message_display)
+        self.thread.receivedServer.connect(self.update_server_display)
         self.thread.start()
 
     
@@ -62,6 +74,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def update_message_display(self, message):
         self.messageDisplay.append(message)  # Afficher le message dans QTextEdit
 
+    def update_server_display(self, message):
+        self.serverDisplay.append(message)
 
     def receive_message(self):
         rcv_msg = self.sock.recv(65536)  # 64Ko
@@ -73,8 +87,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         return(rcv_msg) 
     
     def getFrom_server(self):
+        print("AAAAAAAAAAA")
         server_msg = self.receive_message()
-        server_msg = server_msg[20:]
+        #server_msg = server_msg[]
         print(server_msg)
         return server_msg
 
@@ -111,8 +126,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         
         if self.radioServer.isChecked():
             if self.radioNone.isChecked():
-                txt_encoded = mainFunctions.string_toListInt(txt)
-                self.send_message(txt_encoded, txt)
+                self.messageDisplay.append(">>> Select correct message type")
+            return
 
     def send_message(self, txt_encoded, txt):
         try:
@@ -130,7 +145,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 msg = str.encode(key + "s")
 
             
-
             longueur_txt = len(txt)
             nb_char = longueur_txt.to_bytes(2,"big")
             txt_encoded = mainFunctions.listInt_toString(txt_encoded)
