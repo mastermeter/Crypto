@@ -48,9 +48,9 @@ def listInt_toString(liste_entiers):
    
 
 def shifter(msg,shift) :
-    # Ajouter l'entier à chaque élément de la liste
-    resultats = [elem + shift for elem in msg]
-    return resultats
+     #Ajouter l'entier à chaque élément de la liste
+     resultats = [elem + shift for elem in msg]
+     return resultats
 
 
 def deshifter(msg,deshift) :
