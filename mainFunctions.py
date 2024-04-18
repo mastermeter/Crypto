@@ -62,27 +62,30 @@ def xor(msg,nb) :
     resultats = [elem ^ nb for elem in msg]
     return resultats
 
-def vigenere(msg, key):
-    result = []
-    finalkey = key
-    while len(key)<len(msg):
-        finalkey+=key
-    for i in range(len(msg)):
-        result.append(msg[i]+finalkey[i])
-    return result
+def vigenere(txt,key):
+    txtInList = []
+    keyInList = []
+    transfomTxtInList = []
+    while len(txt)>len(key):
+        key+=key
+        print(key)
+        print(txt)
+    for i in range(len(txt)):
+        txtInList.append(int.from_bytes(txt[i].encode('utf-8')))
+        keyInList.append(int.from_bytes(key[i].encode('utf-8')))
+        transfomTxtInList.append(txtInList[i]+keyInList[i])
+    return transfomTxtInList
 
 def devigenere(msg, key):
     result = []
     finalkey = key
-    while len(key)<len(msg):
+    while len(finalkey)<len(msg):
         finalkey+=key
     for i in range(len(msg)):
-        result.append(msg[i]-finalkey[i])
+        result = msg[i]-finalkey[i]
     return result
 
-
-
-
+print(vigenere("ahvukihlbguiadhf","y"))
 
 
 
