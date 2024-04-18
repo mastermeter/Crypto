@@ -62,33 +62,22 @@ def xor(msg,nb) :
     resultats = [elem ^ nb for elem in msg]
     return resultats
 
-def vignere(msg, key):
-    key = str(key)
-    result = msg[:]
-    key_length = len(key)
-    counter = 0
-    counter2 = 0
-
-    while counter <= len(result) - 1:
-        unit = [result[counter]]
-        result[counter] = shifter(unit, key[counter2])[0]
-        counter += 1
-        counter2 = (counter2 + 1) % key_length
-
+def vigenere(msg, key):
+    result = []
+    finalkey = key
+    while len(key)<len(msg):
+        finalkey+=key
+    for i in range(len(msg)):
+        result.append(msg[i]+finalkey[i])
     return result
 
-def devignere(msg, key):
-    result = msg[:]
-    key_length = len(key)
-    counter = 0
-    counter2 = 0
-
-    while counter <= len(result) - 1:
-        unit = [result[counter]]
-        result[counter] = deshifter(unit, key[counter2])[0]
-        counter += 1
-        counter2 = (counter2 + 1) % key_length
-
+def devigenere(msg, key):
+    result = []
+    finalkey = key
+    while len(key)<len(msg):
+        finalkey+=key
+    for i in range(len(msg)):
+        result.append(msg[i]-finalkey[i])
     return result
 
 
