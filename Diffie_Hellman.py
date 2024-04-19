@@ -132,7 +132,7 @@ print(is_primitive_roots(nb, generator(nb)))
 p = 347
 #Modular word = p
 # A et B choisissent un g (grâce à la fonction generator, qui retourne une liste de g possible, pour un p choisit)
-g = generator(p)[2]
+g = generator(p)[7]
 print("g:",g)
 #generateur à donner au serveur
 
@@ -163,4 +163,19 @@ print(cleCryptageB == cleCryptageA)
 #notre secret partagé
 serveur = 202
 print((serveur**a)%p)
+
+#Recap :
+print("--------------------------------------------------------")
+print("n:",p,"g :",g)
+print("g^a mod p",AenvoiaB)
+
+#notre secret partagé
+serveur = int(input("Entrez une valeur du serveur : "))
+print("Vous avez saisie :",serveur)
+print("Clé à fournir au serveur ",(serveur**a)%p)
+
+
+#Saisir la valeur du serveur dans la variable "serveur"
+print("Secret commun :",(serveur**a)%p)
+
 
