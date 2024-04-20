@@ -37,15 +37,20 @@ def word_to_bytes(word):
     byte_string = b''.join(b'\x00' * (4 - len(char.encode('utf-8'))) + char.encode('utf-8') for char in word)
     return byte_string
 
-def listInt_toString(liste_entiers):
-    # Convertir chaque entier en une liste de bytes
-    liste_bytes = [list(i.to_bytes((i.bit_length() + 7) // 8, 'big') or b'\0') for i in liste_entiers]
+# def listInt_toString(liste_entiers):
+#     # Convertir chaque entier en une liste de bytes
+#     liste_bytes = [list(i.to_bytes((i.bit_length() + 7) // 8, 'big') or b'\0') for i in liste_entiers]
 
-    # Décoder chaque liste de bytes en un caractère
-    message = ''.join(bytes(b).decode('utf-8') for b in liste_bytes)
+#     # Décoder chaque liste de bytes en un caractère
+#     message = ''.join(bytes(b).decode('utf-16') for b in liste_bytes)
+
+#     return message
+   
+def listInt_toString(liste_entiers):
+    # Convertir chaque entier en un caractère
+    message = ''.join(chr(i) for i in liste_entiers)
 
     return message
-   
 
 def shifter(msg,shift) :
      #Ajouter l'entier à chaque élément de la liste
@@ -85,7 +90,6 @@ def devigenere(msg, key):
         result = msg[i]-finalkey[i]
     return result
 
-print(vigenere("ahvukihlbguiadhf","y"))
 
 
 

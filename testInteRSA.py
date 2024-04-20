@@ -27,12 +27,8 @@ class ReceiverThread(QThread):
             try:
                 message = self.app.receive_message()
                 if(self.app.radioServer.isChecked()):
-                    print("KEY IN MESSAGE")
                     print("MESSAGE RECEIVED :"+ message)
                     self.receivedServer.emit(">>> Received from server : " + message)  # Message du serveur
-                    #message = self.app.getFrom_server()
-                    #print("MESSAGE AFTER GET FROM SERVER :"+ message)
-                    #self.receivedServer.emit(">>> " + message)  # Message du serveur
                 else:
                     self.received.emit(">>>Message received: " + message)  # Message normal
 
@@ -144,11 +140,21 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 txt_encoded = mainFunctions.xor(txt_encoded, nb)
                 self.send_message(txt_encoded, txt)
             if self.radioVigenere.isChecked():
-                key = self.getExtraValue()
+                key = int(self.getExtraValue())
                 txt_encoded = mainFunctions.string_toListInt(txt)
                 print("Texte encodé:", txt_encoded)
                 txt_encoded = mainFunctions.vigenere(txt_encoded, key)
                 self.send_message(txt_encoded, txt)
+            if self.radioRSA.isChecked():
+                n = int(self.getExtraValue())
+                e = int(self.getExtraValue())
+                messageRSA = mainFunctions.string_toListInt(txt)
+                print("Message RSA:", messageRSA)
+                print("n:", n)
+                print("e:", e)
+                txt_encoded = rsaFunctions.encryptKey(messageRSA, e, n)
+                self.send_message(txt_encoded, txt)
+
             
         
         if self.radioImage.isChecked():
