@@ -130,28 +130,52 @@ print(is_primitive_roots(nb, generator(nb)))
 
 # A et B choisissent un p (nombre premier pris au hasard (p < 256^4) )
 p = 347
-
+#Modular word = p
 # A et B choisissent un g (grâce à la fonction generator, qui retourne une liste de g possible, pour un p choisit)
-g = generator(p)[2]
+g = generator(p)[7]
+print("g:",g)
+#generateur à donner au serveur
 
 # nombre secret de A
 a = 33
 
-# nombre secret de A
+# nombre secret de B
 b = 67
 
 # A fourni à B => g^a mod p
+#Envoyé au serveur
 AenvoiaB = (g ** a) % p
-
+print("g^a mod p",AenvoiaB)
 # B fourni à A => g^b mod p
+#Serveur nous envoie
 BenvoiaA = (g ** b) % p
 
-# B calcul g^b mod p * g^a mod p = g^(b*a) mod p
-cleCryptageB = ((g ** b) % p) * ((g ** a) % p)
+# B calcul (g^b mod p) ^ a = g^(b*a) mod p
+cleCryptageB = ((AenvoiaB)**b) % p
 
-# A calcul g^a mod p * g^b mod p = g^(b*a) mod p
-cleCryptageA = ((g ** a) % p) * ((g ** b) % p)
+# A calcul (g^a mod p) ^ b` = g^(b*a) mod p
+cleCryptageA = ((BenvoiaA)**a) % p
+print(cleCryptageA)
 
 #On a bien :
 print(cleCryptageB == cleCryptageA)
+
+#notre secret partagé
+serveur = 202
+print((serveur**a)%p)
+
+#Recap :
+print("--------------------------------------------------------")
+print("n:",p,"g :",g)
+print("g^a mod p",AenvoiaB)
+
+#notre secret partagé
+serveur = int(input("Entrez une valeur du serveur : "))
+print("Vous avez saisie :",serveur)
+print("Clé à fournir au serveur ",(serveur**a)%p)
+
+
+#Saisir la valeur du serveur dans la variable "serveur"
+print("Secret commun :",(serveur**a)%p)
+
 
