@@ -73,7 +73,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         value = self.valueEditor.toPlainText()
         print("Valeur supplémentaire:", value)
         try:
-            return int(value)
+            return value
         except ValueError:
             print("La valeur supplémentaire n'est pas un entier valide.")
             return None
@@ -111,7 +111,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             if self.radioVigenere.isChecked():
                 key = self.getExtraValue()
                 txt_encoded = mainFunctions.string_toListInt(txt)
-                txt_encoded = mainFunctions.vignere(txt_encoded, key)
+                txt_encoded = mainFunctions.vigenere(txt_encoded, key)
                 self.send_message(txt_encoded, txt)
         
         if self.radioImage.isChecked():
@@ -146,7 +146,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             if self.radioVigenere.isChecked():
                 key = self.getExtraValue()
                 txt_encoded = mainFunctions.string_toListInt(txt)
-                txt_encoded = mainFunctions.vignere(txt_encoded, key)
+                txt_encoded = mainFunctions.vigenere(txt_encoded, key)
                 self.send_message(txt_encoded, txt)
         
         if self.radioImage.isChecked():
@@ -178,9 +178,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             txt_encoded = mainFunctions.listInt_toString(txt_encoded)
             final_text = mainFunctions.word_to_bytes(txt_encoded)
             msg_final = msg + nb_char + final_text
-            print("Message envoyé:", msg_final)
     
-
             self.sock.send(msg_final)
         except Exception as e:
             print(f"Erreur lors de l'envoi des données: {e}")

@@ -62,18 +62,16 @@ def xor(msg,nb) :
     resultats = [elem ^ nb for elem in msg]
     return resultats
 
-def vigenere(txt,key):
-    txtInList = []
+def vigenere(listInt,key):
     keyInList = []
     transfomTxtInList = []
-    while len(txt)>len(key):
+    while len(listInt)>len(key):
         key+=key
         print(key)
-        print(txt)
-    for i in range(len(txt)):
-        txtInList.append(int.from_bytes(txt[i].encode('utf-8')))
+        print(listInt)
+    for i in range(len(listInt)):
         keyInList.append(int.from_bytes(key[i].encode('utf-8')))
-        transfomTxtInList.append(txtInList[i]+keyInList[i])
+        transfomTxtInList.append(listInt[i]+keyInList[i])
     return transfomTxtInList
 
 def devigenere(msg, key):
@@ -85,46 +83,5 @@ def devigenere(msg, key):
         result = msg[i]-finalkey[i]
     return result
 
-print(vigenere("ahvukihlbguiadhf","y"))
 
-
-
-# a0 = [1, 2, 3, 4]
-# b = [9, 3]
-# c = vignere(a0, b)
-# print('Encrypted:', c)
-# d = devignere(c, b)
-# print('Decrypted:', d)
-
-#test = "j'aime le Chocolat ç `ñ"
-
-#print(test)
-# # Transformer le texte en une liste de lettre convertie en utf8 (entier) stocké dans une liste d'entier
-#returnresult = string_toListInt(test)
-
-#print(returnresult)
-# # shifter de 1 chaque entier de la liste
-# print(shifter(returnresult,1))
-# # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
-# print(encoding(shifter(returnresult,1)))
-# #décoder la suite de binaire en une liste d'entier
-# print(decoding(encoding(shifter(returnresult,1))))
-# #fonction qui enlève le shift sur tous les membres de liste d'entier
-# print(deshifter(decoding(encoding(shifter(returnresult,1))),1))
-# #fonction qui converti la liste d'entier en un string
-# print(listInt_toString(deshifter(decoding(encoding(shifter(returnresult,1))),1)))
-
-# print("----------------------------------------------------------------")
-
-# print(test)
-# print(returnresult)
-# # xor de 4 chaque entier de la liste
-# print(xor(returnresult,4))
-# # transformer chaque entier en un chiffre binaire de 4 bytes et en ajoutant au début " bytes correspondants au nombre de caractères envoyés
-# print(encoding(xor(returnresult,4)))
-# #décoder la suite de binaire en une liste d'entier
-# print(decoding(encoding(xor(returnresult,4))))
-# #fonction qui enlève le xor sur tous les membres de liste d'entier
-# print(xor(decoding(encoding(xor(returnresult,4))),4))
-# #fonction qui converti la liste d'entier en un string
-# print(listInt_toString(xor(decoding(encoding(xor(returnresult,4))),4)))
+print(encoding([34646]))

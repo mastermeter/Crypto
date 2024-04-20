@@ -1,19 +1,17 @@
 #considering txt which is string and a key which is a string
-def vigenere(txt,key):
-    txtInList = []
+def vigenere(listInt,key):
+    print(listInt)
+    print(key)
     keyInList = []
     transfomTxtInList = []
-    while len(txt)>len(key):
+    while len(listInt)>len(key):
         key+=key
-        print(key)
-        print(txt)
-    for i in range(len(txt)):
-        txtInList.append(int.from_bytes(txt[i].encode('utf-8')))
+    print(listInt)
+    print(key)
+    for i in range(len(listInt)):
         keyInList.append(int.from_bytes(key[i].encode('utf-8')))
-        transfomTxtInList.append(txtInList[i]+keyInList[i])
+        transfomTxtInList.append(listInt[i]+keyInList[i])
+    print(keyInList)
+    print(listInt)
+    print(transfomTxtInList)
     return transfomTxtInList
-
-    
-vigenere("Salut à tous les amis, comment ça va ?","afhjgvkfj")
-
-
