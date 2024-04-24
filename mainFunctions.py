@@ -38,24 +38,24 @@ def word_to_bytes(word):
     return byte_string
 
 # def listInt_toString(liste_entiers):
-#     # Convertir chaque entier en une liste de bytes
+#      # Convertir chaque entier en une liste de bytes
 #     liste_bytes = [list(i.to_bytes((i.bit_length() + 7) // 8, 'big') or b'\0') for i in liste_entiers]
 
-#     # Décoder chaque liste de bytes en un caractère
+#      # Décoder chaque liste de bytes en un caractère
 #     message = ''.join(bytes(b).decode('utf-16') for b in liste_bytes)
 
 #     return message
    
 def listInt_toString(liste_entiers):
-    # Convertir chaque entier en un caractère
+     # Convertir chaque entier en un caractère
     message = ''.join(chr(i) for i in liste_entiers)
 
     return message
 
 def shifter(msg,shift) :
-     #Ajouter l'entier à chaque élément de la liste
-     resultats = [elem + shift for elem in msg]
-     return resultats
+    #Ajouter l'entier à chaque élément de la liste
+    resultats = [elem + shift for elem in msg]
+    return resultats
 
 
 def deshifter(msg,deshift) :

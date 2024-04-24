@@ -85,6 +85,7 @@ def encryptKey(message, e, n):
     print(type(message))
     if type(message) == list:
         result = [modulo_exponentiation(elem, e, n) for elem in message]
+        print(type(result))
         return result
     else: return Exception("Message must be a list of integers")
     #return modulo_exponentiation(message, e, n)

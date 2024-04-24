@@ -23,22 +23,22 @@ class ReceiverThread(QThread):
         self.sock = sock
 
     def run(self):
-         while True:
-            try:
-                message = self.app.receive_message()
-                if(self.app.radioServer.isChecked()):
-                    print("KEY IN MESSAGE")
-                    print("MESSAGE RECEIVED :"+ message)
-                    self.receivedServer.emit(">>> Received from server : " + message)  # Message du serveur
-                    #message = self.app.getFrom_server()
-                    #print("MESSAGE AFTER GET FROM SERVER :"+ message)
-                    #self.receivedServer.emit(">>> " + message)  # Message du serveur
-                else:
-                    self.received.emit(">>>Message received: " + message)  # Message normal
+          while True:
+             try:
+                 message = self.app.receive_message()
+                 if(self.app.radioServer.isChecked()):
+                     print("KEY IN MESSAGE")
+                     print("MESSAGE RECEIVED :"+ message)
+                     self.receivedServer.emit(">>> Received from server : " + message)  # Message du serveur
+                     #message = self.app.getFrom_server()
+                     #print("MESSAGE AFTER GET FROM SERVER :"+ message)
+                     #self.receivedServer.emit(">>> " + message)  # Message du serveur
+                 else:
+                     self.received.emit(">>>Message received: " + message)  # Message normal
 
-            except Exception as e:
-                print(f"Erreur lors de la réception des données: {e}")
-                break
+             except Exception as e:
+                 print(f"Erreur lors de la réception des données: {e}")
+                 break
 
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -81,6 +81,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def receive_message(self):
         rcv_msg = self.sock.recv(65536)  # 64Ko
+        print("Message reçu AAAAAAAAAA", rcv_msg)
         rcv_msg = rcv_msg.replace(b'\0', b'')
         rcv_msg = rcv_msg.decode('utf-8')
         rcv_msg = rcv_msg[5:]
@@ -102,6 +103,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 shift = int(self.getExtraValue())
                 txt_encoded = mainFunctions.string_toListInt(txt)
                 txt_encoded = mainFunctions.shifter(txt_encoded, shift)
+                print("Texte encodé:", txt_encoded)
                 self.send_message(txt_encoded, txt)
             if self.radioXor.isChecked():
                 nb = int(self.getExtraValue())

@@ -103,8 +103,8 @@ def generator(k):
     return result
 
 nb = 653
-print(eratosthene(800))
-print(generator(nb))
+#print(eratosthene(800))
+#print(generator(nb))
 
 def is_primitive_roots(modulo, roots):
     # Calcul de l'ordre du groupe multiplicatif modulo n
@@ -146,6 +146,7 @@ b = 67
 #Envoyé au serveur
 AenvoiaB = (g ** a) % p
 print("g^a mod p",AenvoiaB)
+print(AenvoiaB)
 # B fourni à A => g^b mod p
 #Serveur nous envoie
 BenvoiaA = (g ** b) % p
@@ -157,25 +158,25 @@ cleCryptageB = ((AenvoiaB)**b) % p
 cleCryptageA = ((BenvoiaA)**a) % p
 print(cleCryptageA)
 
-#On a bien :
-print(cleCryptageB == cleCryptageA)
+# #On a bien :
+# print(cleCryptageB == cleCryptageA)
+#
+# #notre secret partagé
+# serveur = 202
+# print((serveur**a)%p)
 
-#notre secret partagé
-serveur = 202
-print((serveur**a)%p)
+# #Recap :
+# print("--------------------------------------------------------")
+# print("n:",p,"g :",g)
+# print("g^a mod p",AenvoiaB)
 
-#Recap :
-print("--------------------------------------------------------")
-print("n:",p,"g :",g)
-print("g^a mod p",AenvoiaB)
-
-#notre secret partagé
-serveur = int(input("Entrez une valeur du serveur : "))
-print("Vous avez saisie :",serveur)
-print("Clé à fournir au serveur ",(serveur**a)%p)
+# #notre secret partagé
+# serveur = int(input("Entrez une valeur du serveur : "))
+# print("Vous avez saisie :",serveur)
+# print("Clé à fournir au serveur ",(serveur**a)%p)
 
 
-#Saisir la valeur du serveur dans la variable "serveur"
-print("Secret commun :",(serveur**a)%p)
+# #Saisir la valeur du serveur dans la variable "serveur"
+# print("Secret commun :",(serveur**a)%p)
 
 
