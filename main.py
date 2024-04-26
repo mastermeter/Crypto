@@ -3,8 +3,6 @@ import socket
 import time
 from datetime import datetime
 
-
-
 import mainFunctions, rsaFunctions, Diffie_Hellman
 
 from PyQt5 import QtWidgets
@@ -90,11 +88,11 @@ class ReceiverThread(QThread):
             except socket.error as e:
                 # Une exception socket.error peut survenir si des problèmes de réseau surviennent
                 print(f"Erreur socket lors de la réception des données: {e}")
-                break
+                continue
             except Exception as e:
                 # Autres exceptions générales
                 print(f"Erreur générale lors de la réception des données: {e}")
-                break
+                continue
 
     def stop(self):
         """Fonction pour arrêter le thread proprement."""
@@ -133,7 +131,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.previous_message = None
         self.second_last_message = None
-
 
     #Stores last message received from server
     def on_message_received(self, message):
@@ -207,7 +204,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
             time.sleep(1)
             self.autoDifHel()
-        elif(type == "RSA"):
+        elif(type == "RSA" and encode == "encode"):
             txt = str(task) + " " + str(type) + " " + str(encode) + " " + str(value)
             txt_encoded = mainFunctions.string_toListInt(txt)
             self.send_message(txt_encoded, txt)
@@ -221,7 +218,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
         #appeler les fonctions qui gèrent les différents cas
     
-
     def autoDifHel(self):
         print("lol")
         a = 33
@@ -269,8 +265,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     
         self.send_message(encryptedMessage, message)
-
-
 
     def getExtraValue(self):
         value = self.valueEditor.toPlainText()
@@ -344,11 +338,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         if self.radioShift.isChecked():
             previous_msg = self.second_last_message
             shift = int(self.splitServerMessage(previous_msg))
+            savedShift = shift
             txt = self.splitServerMessage(self.previous_message)
             print("BBBBBBBBBBBBBBB")
             txt_encoded = mainFunctions.string_toListInt(txt)
             print("Texte encodé sans shift:", txt_encoded)
-            txt_encoded = mainFunctions.shifter(txt_encoded, shift)
+            txt_encoded = mainFunctions.shifter(txt_encoded, savedShift)
             print("Texte encode avec shift ", txt_encoded)
             self.send_message(txt_encoded, txt)
 
@@ -392,9 +387,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.sock.send(msg_final)
         except Exception as e:
             print(f"Erreur lors de l'envoi des données: {e}")
-
-    
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
